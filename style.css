@@ -1,0 +1,20 @@
+.grid {
+    display: flex;
+    flex-direction: row;
+}
+
+.grid-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-pixel {
+    background-color: yellow;
+    width: 20px;
+    height: 20px;
+    border: 1px black solid;
+}
+
+.grid-pixel-drawn {
+    background-color: red;
+}
