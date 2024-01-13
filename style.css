@@ -18,3 +18,7 @@
 .grid-pixel-drawn {
     background-color: red;
 }
+
+button {
+  cursor: pointer;
+}
