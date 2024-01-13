@@ -23,10 +23,6 @@
     flex: 1 1 auto;
 }
 
-.grid-pixel-drawn {
-    background-color: red;
-}
-
 button {
   cursor: pointer;
 }

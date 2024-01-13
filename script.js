@@ -19,10 +19,25 @@ for (let i = 0; i < 4; i++) {
         gridPixel.setAttribute("class", "grid-pixel");
         gridPixel.addEventListener("mouseenter", () => {
             if (state_mouseDown) {
-                gridPixel.classList.add("grid-pixel-drawn");
+                let red = 255, green = 0, blue = 0, a = 1;
                 if (state_rgb) {
-                    gridPixel.style.backgroundColor = `rgb(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)})`;
+                    red = Math.round(Math.random() * 255);
+                    green = Math.round(Math.random() * 255);
+                    blue = Math.round(Math.random() * 255);
                 }
+                if (state_progressive) {
+                    if (!gridPixel.hasAttribute("data-opacity")) {
+                        gridPixel.setAttribute("data-opacity", "0.1");
+                    }
+                    else if (gridPixel.getAttribute("data-opacity") !== "1") {
+                        gridPixel.setAttribute("data-opacity", String(Number(gridPixel.getAttribute("data-opacity")) + 0.1));
+                    }
+                    a = gridPixel.getAttribute("data-opacity");
+                }
+                else {
+                    gridPixel.removeAttribute("data-opacity");
+                }
+                gridPixel.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${a})`;
             }
         })
         gridColumn.appendChild(gridPixel);
@@ -73,5 +88,16 @@ rgbButton.addEventListener("click", () => {
     } else {
         rgbButton.innerHTML = "un-rgb";
         state_rgb = true;
+    }
+});
+
+let progressiveButton = document.querySelector("#progressive-button");
+progressiveButton.addEventListener("click", () => {
+    if (state_progressive) {
+        progressiveButton.innerHTML = "progresive";
+        state_progressive = false;
+    } else {
+        progressiveButton.innerHTML = "un-progressive";
+        state_progressive = true;
     }
 });
