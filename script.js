@@ -2,9 +2,12 @@ let state_mouseDown = false;
 document.addEventListener("mousedown", () => state_mouseDown = true);
 document.addEventListener("mouseup", () => state_mouseDown = false);
 
+let gridContainer = document.createElement("div");
+gridContainer.setAttribute("class", "grid-container");
+document.body.appendChild(gridContainer);
 let sketchGrid = document.createElement("div");
 sketchGrid.setAttribute("class", "grid")
-document.body.appendChild(sketchGrid);
+gridContainer.appendChild(sketchGrid);
 for (let i = 0; i < 4; i++) {
     let gridColumn = document.createElement("div");
     gridColumn.setAttribute("class", "grid-column");
@@ -23,8 +26,8 @@ for (let i = 0; i < 4; i++) {
 
 let resizeButton = document.querySelector("#resize-button");
 resizeButton.addEventListener("click", () => {
-    let newWidth = Number(prompt("input new width of grid"));
-    if (newWidth === NaN || newWidth <= 0) {
+    let newWidth = Number(prompt("input new width of grid between 1 and 100"));
+    if (newWidth === NaN || newWidth <= 0 || newWidth > 100) {
         alert("invalid width, please try again");
         return;
     }
@@ -32,13 +35,14 @@ resizeButton.addEventListener("click", () => {
 });
 
 function resetGrid(width) {
-    document.body.removeChild(sketchGrid);
+    gridContainer.removeChild(sketchGrid);
     sketchGrid = document.createElement("div");
     sketchGrid.setAttribute("class", "grid")
-    document.body.appendChild(sketchGrid);
+    gridContainer.appendChild(sketchGrid);
     for (let i = 0; i < width; i++) {
         let gridColumn = document.createElement("div");
         gridColumn.setAttribute("class", "grid-column");
+        gridColumn.style.setProperty("flex-basis", `${100/width}%`);
         sketchGrid.appendChild(gridColumn);
         for (let j = 0; j < width; j++) {
             let gridPixel = document.createElement("div");

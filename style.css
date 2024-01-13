@@ -1,19 +1,28 @@
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .grid {
     display: flex;
     flex-direction: row;
+    width: 25vw;
+    height: 25vw;
 }
 
 .grid-column {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .grid-pixel {
     background-color: yellow;
-    width: 20px;
-    height: 20px;
-    border: 1px black solid;
+    padding-top: 100%;
+    flex: 1 1 auto;
 }
+
 
 .grid-pixel-drawn {
     background-color: red;
