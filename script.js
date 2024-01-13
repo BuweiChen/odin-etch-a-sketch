@@ -1,4 +1,6 @@
 let state_mouseDown = false;
+let state_rgb = false;
+let state_progressive = false;
 document.addEventListener("mousedown", () => state_mouseDown = true);
 document.addEventListener("mouseup", () => state_mouseDown = false);
 
@@ -18,6 +20,9 @@ for (let i = 0; i < 4; i++) {
         gridPixel.addEventListener("mouseenter", () => {
             if (state_mouseDown) {
                 gridPixel.classList.add("grid-pixel-drawn");
+                if (state_rgb) {
+                    gridPixel.style.backgroundColor = `rgb(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)})`;
+                }
             }
         })
         gridColumn.appendChild(gridPixel);
@@ -50,9 +55,23 @@ function resetGrid(width) {
             gridPixel.addEventListener("mouseenter", () => {
                 if (state_mouseDown) {
                     gridPixel.classList.add("grid-pixel-drawn");
+                    if (state_rgb) {
+                        gridPixel.style.backgroundColor = `rgb(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)})`;
+                    }
                 }
             })
             gridColumn.appendChild(gridPixel);
         }
     }
 }
+
+let rgbButton = document.querySelector("#rgb-button");
+rgbButton.addEventListener("click", () => {
+    if (state_rgb) {
+        rgbButton.innerHTML = "rgb";
+        state_rgb = false;
+    } else {
+        rgbButton.innerHTML = "un-rgb";
+        state_rgb = true;
+    }
+});
